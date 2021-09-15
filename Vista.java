@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 //Universidad del Valle de Guatemala
 //Programación Orientada a Objetos
 //Catedrático Tomás Gálvez
@@ -21,7 +19,217 @@ import java.time.LocalTime;
 public class Vista {
     private Scanner scan1 = new Scanner(System.in);
 
+    /**
+     * Bienvenida para el usuario.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version bienvenida 1.1
+     */
     public void bienvenida(){
-        
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("- BIENVENIDO");
+        System.out.println("- Hora: "+LocalTime.now().getHour()+" horas con "+LocalTime.now().getMinute()+" minutos.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("- Este es el Simulador de memoria RAM.");
+        System.out.println("- Este programa le permitirá simular el tipo de memoria RAM que desee.");
+        System.out.println("- Puede elegir entre SDR o DDR.");
+        System.out.println("- Por favor siga las instrucciones del programa.");
+        System.out.println("- Cuando ingrese datos, tendrá que colocar datos validos para avanzar.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("- QUE COMIENCE LA SIMULACION.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * Obtiene del usuario el tipo de memoria RAM que se utilizara.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version solicitar_tipo_memoria 1.1
+     * @return int
+     */
+    public int solicitar_tipo_memoria(){
+        boolean continuar = true;
+        int tipo_memoria = 0;
+        while(continuar){
+            try{
+                System.out.println("- Ingrese 1 para SDR.");
+                System.out.println("- Ingrese 2 para DDR.");
+                System.out.println();
+                System.out.print("\tIngrese su desicion: ");
+                tipo_memoria = scan1.nextInt(3);
+                if(!(tipo_memoria==0)){
+                    System.out.println("---------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("- EUREKA");
+                    if(tipo_memoria == 1){
+                        System.out.println("- Ha escogido una memoria RAM de tipo SDR.");
+                    }
+                    else{
+                        System.out.println("- Ha escogido una memoria RAM de tipo DDR.");
+                    }
+                    System.out.println("---------------------------------------------------------------------------------------------------------------------");
+                    continuar = false;
+                }
+                else{
+                System.out.println();
+                System.out.println("\t\tERROR: debe ingresar 1 o 2.");
+                System.out.println();
+                }
+                
+            }
+            catch(Exception e){
+                System.out.println();
+                System.out.println("\t\tERROR: debe ingresar 1 o 2.");
+                System.out.println();
+                scan1.next();
+            }
+        }
+        return tipo_memoria;
+    }
+
+    /**
+     * Obtiene del usuario un numero entero.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version opcion_usuario_int 1.1
+     * @return int
+     */
+    public int opcion_usuario_int(){
+        int opcion = 0;
+        boolean continuar = true;
+        while(continuar){
+            try{
+                opcion = scan1.nextInt();
+                continuar = false;
+            }
+            catch(Exception e){
+                System.out.println("\t\t- Error: debe ingresar un numero entero.");
+                scan1.next();
+            }
+        }
+        return opcion;
+    }
+
+    /**
+     * bienvenida para el usuario si desea una memoria SDR.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version bienvenida_sdr 1.1
+     */
+    public void bienvenida_sdr(){
+        System.out.println("- Bienvenido a la memoria SDR.");
+        System.out.println("- Este es un tipo de memoria de estático.");
+        System.out.println("- Su tamano es de 16GB (256 Bloques).");
+        System.out.println("- Como en una computadora normal, el sistema operativo ocupa cierto espacio.");
+        System.out.println("- Pero no te preocupes, es solamente el 12 por ciento (30 bloques).");
+        System.out.println("- Para comenzar, elegiremos los programas que deseas ingresar con la RAM.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * solicita al usuario el numero de programas que desea ejecutar en la RAM y los indices de cada programa.
+     * Si no desea ejecutar programas, el usuario puede escoger 0 y el programa correra sin programas nuevos.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version solicitar_programas_usuario 1.1
+     * @return int[] (indices de los programas)
+     */
+    public int[] solicitar_programas_usuario(){
+        BibliotecaProgramas biblioteca = new BibliotecaProgramas();
+        Programa[] programas = biblioteca.get_programas();
+        System.out.println("- Los programas disponibles son: ");
+        for(int k = 0; k<programas.length; k++){
+            System.out.print(k+1);
+            System.out.print(". ");
+            System.out.println(programas[k].get_nombre_programa());
+        }
+        int longitud;
+        System.out.println();
+        System.out.print("- Ingresa el numero de programas que deseas ejecutar. (Si no desea ejecutar ninguno, ingresa 0): ");
+        longitud = opcion_usuario_int();
+        System.out.println();
+        int[] indices;
+        if(longitud==0){
+            int[] indice_cero = {0};
+            indices = indice_cero;
+        }
+        else{
+            indices = new int[longitud];
+            for(int j = 0; j<longitud; j++){
+                int numero_app = 0;
+                numero_app = solicitar_numero_app(j);
+                indices[j] = numero_app;
+            }
+        }
+        return indices;
+    }
+
+    /**
+     * solicita al usuario el numero indice de cada programa.
+     * se utiliza en el metodo solicitar_programas_usuario()
+     * solo se puede ingresar un numero entre 1 y 9.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version solicitar_numero_app 1.1
+     * @return int (indices de los programas)
+     * @param int (contador para darle a conocer el usuario el numero de programa que debe ingresar)
+     */
+    private int solicitar_numero_app(int j){
+        boolean continuar = true;
+        int numero_app = 0;
+        while(continuar){
+            try{
+                System.out.print("Ingrese numero de la app "+(j+1)+": ");
+                numero_app = scan1.nextInt(10);
+                // System.out.println();
+                if(!(numero_app==0)){
+                    continuar = false;
+                }
+                else{
+                System.out.println();
+                System.out.println("\t\tERROR: debe ingresar un numero del 1 al 9.");
+                System.out.println();
+                }
+                
+            }
+            catch(Exception e){
+                System.out.println();
+                System.out.println("\t\tERROR: debe ingresar un numero del 1 al 9.");
+                System.out.println();
+                scan1.next();
+            }
+        }
+        return numero_app;
+    }
+
+    /**
+     * metodo para poder mostrar los bloques de memoria RAM.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version mostrar_memoria_sdr 1.1
+     * @param String[] (String de bloques de memoria de la sdr)
+     */
+    public void mostrar_memoria_sdr(String[] bloques_memoria){
+        System.out.println();
+        System.out.println("- MEMORIA SDR (256 bloques):");
+        System.out.println();
+        for(int k = 0; k<256; k++){
+            System.out.println(bloques_memoria[k]);
+        }
+        System.out.println();
+    }
+
+
+
+
+
+    /**
+     * Mensaje de error para el ususario
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version mensaje_error 1.1
+     */
+    public void mensaje_error(){
+        System.out.println("\t- Error: por favor escoger una opcion del menu.");
     }
 }

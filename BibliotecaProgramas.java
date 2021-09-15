@@ -122,14 +122,14 @@ public class BibliotecaProgramas {
         return mi_programa;
     }
 
-    // /**
-    //  * getter de Programa[].
-    //  * 
-    //  * @author José Daniel Gómez Cabrera
-    //  * @version get_programas 1.1
-    //  * @return Programa[]
-    //  */
-    // public Programa[] get_programas(){
-    //     return this.programas_disponibles;
-    // }
+    /**
+     * getter de programas en la biblioteca para mostrarlos en vista.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version get_programas 1.1
+     * @return Programa[]
+     */
+    public Programa[] get_programas(){
+        return this.programas_disponibles;
+    }
 }
