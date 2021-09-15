@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 //Universidad del Valle de Guatemala
 //Programación Orientada a Objetos
 //Catedrático Tomás Gálvez
@@ -7,6 +9,9 @@
 //Sección 11
 //Actividad: Laboratorio 2
 
+import java.util.Scanner;
+import java.time.LocalTime;
+
 /**
  * Clase Vista.
  * 
@@ -14,5 +19,9 @@
  * @version Vista Class 1.1
  */
 public class Vista {
-    
+    private Scanner scan1 = new Scanner(System.in);
+
+    public void bienvenida(){
+        
+    }
 }
