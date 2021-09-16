@@ -63,13 +63,13 @@ public class SDR {
             Programa[] programas_a_ejecutar = convertir_indices_a_programas(indices);
             //Quitar programa de la lista de ejecucion y los bloques de memoria si sus ciclos de reloj restantes son 0.
             ArrayList<Programa> copia_lista_ejecucion = new ArrayList<Programa>(lista_ejecucion);
-            if(!this.lista_ejecucion.isEmpty()){
+            if(!(this.lista_ejecucion.isEmpty())){
                 for(int k = 0; k<copia_lista_ejecucion.size(); k++){
-                    if((copia_lista_ejecucion.get(k).get_ciclos_restantes())==0){
+                    if((copia_lista_ejecucion.get(k).get_ciclos_restantes())==1){
                         this.lista_ejecucion.remove(copia_lista_ejecucion.get(k));
                         for(int i = 0; i<256; i++){
                             if((bloques_memoria[i]).equals(copia_lista_ejecucion.get(k).get_nombre_programa())){
-                                this.bloques_memoria[k] = "Libre";
+                                this.bloques_memoria[i] = "Libre";
                             }
                         }
                         actualizar_espacios();
@@ -77,7 +77,7 @@ public class SDR {
                 }
             }
             //Actualizar cilos de reloj restantes para los programas en la lista de ejecucion.
-            if(!this.lista_ejecucion.isEmpty()){
+            if(!(this.lista_ejecucion.isEmpty())){
                 for(int j = 0; j<lista_ejecucion.size(); j++){
                     lista_ejecucion.get(j).actualizar_ciclos_restantes();
                 }
@@ -251,11 +251,25 @@ public class SDR {
         return this.lista_cola;
     }
 
-    // public int get_espacios_libres(){
-    //     return this.espacios_libres;
-    // }
+    /**
+     * Getter de la espacios libres de la sdr.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version get_espacios_libres 1.1
+     * @return int
+     */
+    public int get_espacios_libres(){
+        return this.espacios_libres;
+    }
 
-    // public int get_espacios_ocupados(){
-    //     return this.espacios_ocupados;
-    // }
+    /**
+     * Getter de la espacios ocupados de la sdr.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version get_espacios_ocupados 1.1
+     * @return int
+     */
+    public int get_espacios_ocupados(){
+        return this.espacios_ocupados;
+    }
 }
