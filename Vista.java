@@ -120,7 +120,7 @@ public class Vista {
     public void bienvenida_sdr(){
         System.out.println("- Bienvenido a la memoria SDR.");
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
-        System.out.println("- Este es un tipo de memoria de estático.");
+        System.out.println("- Este es un tipo de memoria de estatico.");
         System.out.println("- Su tamano es de 16GB (256 Bloques).");
         System.out.println("- Como en una computadora normal, el sistema operativo ocupa cierto espacio.");
         System.out.println("- Pero no te preocupes, es solamente el 12 por ciento (30 bloques).");
@@ -148,7 +148,7 @@ public class Vista {
      * Mensaje para notificar al usuario que la SDR se creo exitosamente.
      * 
      * @author José Daniel Gómez Cabrera
-     * @version sdr_creada_exitosamente 1.1
+     * @version ciclo_sdr_exitoso 1.1
      */
     public void ciclo_sdr_exitoso(){
         System.out.println();
@@ -180,7 +180,7 @@ public class Vista {
      * @version solicitar_opcion_menu_sdr 1.1
      * @return int
      */
-    public int solicitar_opcion_menu_sdr(){
+    public int solicitar_opcion_menu_memoria(){
         boolean continuar = true;
         int opcion = 0;
         while(continuar){
@@ -327,11 +327,16 @@ public class Vista {
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
     }
 
-    public void mostrar_info_sdr(int bloques_libres, int bloques_ocupados, ArrayList<Programa> lista_ejecucion, ArrayList<Programa> lista_cola){
+    public void mostrar_info_memoria(int tipo_memoria, String tamano, int bloques_libres, int bloques_ocupados, ArrayList<Programa> lista_ejecucion, ArrayList<Programa> lista_cola){
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
-        System.out.println("- INFORMACION DE MEMORIA SDR:");
+        if(tipo_memoria==1){
+            System.out.println("- INFORMACION DE MEMORIA SDR:");
+        }
+        else{
+            System.out.println("- INFORMACION DE MEMORIA DDR:");
+        }
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
-        System.out.println("- Cantidad total de memoria: 16 GB (256 bloques)");
+        System.out.println("- Cantidad total de memoria: "+tamano);
         System.out.print("- Cantidad de Memoria Disponible: ");
         System.out.println(bloques_libres+" Bloques");
         System.out.print("- Cantidad de Memoria en Uso: ");
@@ -366,6 +371,87 @@ public class Vista {
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
     }
 
+    /**
+     * bienvenida para el usuario si desea una memoria DDR.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version bienvenida_ddr 1.1
+     */
+    public void bienvenida_ddr(){
+        System.out.println("- Bienvenido a la memoria DDR.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("- Este es un tipo de memoria de dinamico.");
+        System.out.println("- Su tamano inicial es de 4GB (64 Bloques).");
+        System.out.println("- Pero puede aumentar a 8GB(128), 16GB(256) o incluso 32GB(512).");
+        System.out.println("- Como en una computadora normal, el sistema operativo ocupa cierto espacio.");
+        System.out.println("- Pero no te preocupes, es solamente 30 bloques.");
+        System.out.println("- Para comenzar, elegiremos los programas que deseas ingresar con la RAM.");
+        System.out.println("- Si no deseas programas al iniciar la memoria puedes ingresar 0.");
+        System.out.println(" NOTA: Para mejorar la dinamica del programa, toda la informacion solicitada en el");
+        System.out.println(" instructivo del laboratorio 2 es mostrada a traves de una sola opcion del programa.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * Mensaje para notificar al usuario que la DDR se creo exitosamente.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version ddr_creada_exitosamente 1.1
+     */
+    public void ddr_creada_exitosamente(){
+        System.out.println();
+        System.out.println("- Su memoria DDR fue creada exitosamente.");
+        System.out.println("- Ahora accedera al menu, en el cual podra mostrar la RAM completa u obtener informacoin de la misma.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * Menu para la memoria DDR.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version menu_ddr 1.1
+     */
+    public void menu_ddr(){
+        System.out.println("- MENU PRINCIPAL DDR");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("1. Ciclo de Reloj.");
+        System.out.println("2. Mostrar Memoria DDR.");
+        System.out.println("3. Mostrar Informacion de la Memoria DDR.");
+        System.out.println("4. Finalizar programa.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * Mensaje para notificar al usuario que la DDR se creo exitosamente.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version ciclo_ddr_exitoso 1.1
+     */
+    public void ciclo_ddr_exitoso(){
+        System.out.println();
+        System.out.println("- El ciclo de reloj para su memoria DDR fue realizado exitosamente.");
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * metodo para poder mostrar los bloques de memoria RAM.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version mostrar_memoria_ddr 1.1
+     * @param String[] (String de bloques de memoria de la sdr)
+     */
+    public void mostrar_memoria_ddr(ArrayList<String> bloques_memoria){
+        System.out.println();
+        System.out.println();
+        System.out.println("- MEMORIA DDR");
+        System.out.println();
+        for(int k = 0; k<(bloques_memoria.size()); k++){
+            System.out.println(bloques_memoria.get(k));
+        }
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+    }
 
     /**
      * Mensaje de despedida para el ususario
@@ -390,5 +476,6 @@ public class Vista {
      */
     public void mensaje_error(){
         System.out.println("\t- Error: por favor escoger una opcion del menu.");
+        System.out.println();
     }
 }

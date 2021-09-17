@@ -21,6 +21,7 @@ public class SDR {
     private String[] bloques_memoria = new String[256];
     private int espacios_libres;
     private int espacios_ocupados;
+    private String tamano_memoria_sdr = "16GB (256 Bloques)";
 
     /**
      * Constructor de SDR.
@@ -62,10 +63,10 @@ public class SDR {
         try{
             Programa[] programas_a_ejecutar = convertir_indices_a_programas(indices);
             //Quitar programa de la lista de ejecucion y los bloques de memoria si sus ciclos de reloj restantes son 0.
-            ArrayList<Programa> copia_lista_ejecucion = new ArrayList<Programa>(lista_ejecucion);
+            ArrayList<Programa> copia_lista_ejecucion = new ArrayList<Programa>(this.lista_ejecucion);
             if(!(this.lista_ejecucion.isEmpty())){
                 for(int k = 0; k<copia_lista_ejecucion.size(); k++){
-                    if((copia_lista_ejecucion.get(k).get_ciclos_restantes())==1){
+                    if((copia_lista_ejecucion.get(k).get_ciclos_restantes())<=1){
                         this.lista_ejecucion.remove(copia_lista_ejecucion.get(k));
                         for(int i = 0; i<256; i++){
                             if((bloques_memoria[i]).equals(copia_lista_ejecucion.get(k).get_nombre_programa())){
@@ -78,8 +79,8 @@ public class SDR {
             }
             //Actualizar cilos de reloj restantes para los programas en la lista de ejecucion.
             if(!(this.lista_ejecucion.isEmpty())){
-                for(int j = 0; j<lista_ejecucion.size(); j++){
-                    lista_ejecucion.get(j).actualizar_ciclos_restantes();
+                for(int j = 0; j<(this.lista_ejecucion.size()); j++){
+                    this.lista_ejecucion.get(j).actualizar_ciclos_restantes();
                 }
             }
             //Actualizar cola con los programas que se desean ejecutar por parte del usuario.
@@ -88,7 +89,7 @@ public class SDR {
                 ArrayList<Programa> contador_cola_actualizada = new ArrayList<Programa>(cola_actualizada);
                 actualizar_espacios();
                 for(int i = 0; i<contador_cola_actualizada.size(); i++){
-                    if(this.espacios_libres>(contador_cola_actualizada.get(i).get_bloques())){
+                    if(this.espacios_libres>=(contador_cola_actualizada.get(i).get_bloques())){
                         this.lista_ejecucion.add(contador_cola_actualizada.get(i));
                         int bloques_llenados = 0;
                         for(int u = 0; u<this.bloques_memoria.length; u++){
@@ -109,7 +110,7 @@ public class SDR {
                 ArrayList<Programa> contador_cola_actualizada = new ArrayList<Programa>(cola_actualizada);
                 actualizar_espacios();
                 for(int i = 0; i<contador_cola_actualizada.size(); i++){
-                    if(this.espacios_libres>(contador_cola_actualizada.get(i).get_bloques())){
+                    if(this.espacios_libres>=(contador_cola_actualizada.get(i).get_bloques())){
                         this.lista_ejecucion.add(contador_cola_actualizada.get(i));
                         int bloques_llenados = 0;
                         for(int u = 0; u<this.bloques_memoria.length; u++){
@@ -130,9 +131,6 @@ public class SDR {
             throw new RuntimeException(s);
         }
     }
-
-
-
 
     /**
      * convierte un Array de indices a un Array de objetos Programa.
@@ -171,7 +169,7 @@ public class SDR {
      * Se utiliza en el ciclo de reloj de sdr.
      * 
      * @author José Daniel Gómez Cabrera
-     * @version convertir_indices_a_programas 1.1
+     * @version actualizar_cola 1.1
      * @return ArrayList<Programa>
      * @param Programa[] (programas a ejecutar)
      */
@@ -184,8 +182,6 @@ public class SDR {
             for(int k = 0; k<this.lista_cola.size(); k++){
                 cola_actualizada.add(lista_cola.get(k));
             }
-            //System.out.println(cola_actualizada.get(0).get_nombre_programa());
-            //System.out.println(cola_actualizada.get(1).get_nombre_programa());
             return cola_actualizada;
         }
         catch(Exception e){
@@ -234,7 +230,7 @@ public class SDR {
      * 
      * @author José Daniel Gómez Cabrera
      * @version get_lista_ejecucion 1.1
-     * @return ArrayList<Programa> (memoria)
+     * @return ArrayList<Programa>
      */
     public ArrayList<Programa> get_lista_ejecucion(){
         return this.lista_ejecucion;
@@ -245,7 +241,7 @@ public class SDR {
      * 
      * @author José Daniel Gómez Cabrera
      * @version get_lista_cola 1.1
-     * @return ArrayList<Programa> (memoria)
+     * @return ArrayList<Programa>
      */
     public ArrayList<Programa> get_lista_cola(){
         return this.lista_cola;
@@ -271,5 +267,16 @@ public class SDR {
      */
     public int get_espacios_ocupados(){
         return this.espacios_ocupados;
+    }
+
+    /**
+     * Getter del tamano de memoria de la sdr.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version get_tamano_sdr 1.1
+     * @return String
+     */
+    public String get_tamano_sdr(){
+        return this.tamano_memoria_sdr;
     }
 }
