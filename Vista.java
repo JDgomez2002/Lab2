@@ -28,6 +28,7 @@ public class Vista {
      */
     public void bienvenida(){
         System.out.println();
+        System.out.println();
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("- BIENVENIDO");
         System.out.println("- Hora: "+LocalTime.now().getHour()+" horas con "+LocalTime.now().getMinute()+" minutos.");
@@ -69,6 +70,7 @@ public class Vista {
                         System.out.println("- Ha escogido una memoria RAM de tipo DDR.");
                     }
                     System.out.println("---------------------------------------------------------------------------------------------------------------------");
+                    System.out.println();
                     continuar = false;
                 }
                 else{
@@ -118,6 +120,8 @@ public class Vista {
      * @version bienvenida_sdr 1.1
      */
     public void bienvenida_sdr(){
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("- Bienvenido a la memoria SDR.");
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("- Este es un tipo de memoria de estatico.");
@@ -142,6 +146,7 @@ public class Vista {
         System.out.println("- Su memoria SDR fue creada exitosamente.");
         System.out.println("- Ahora accedera al menu, en el cual podra mostrar la RAM completa u obtener informacoin de la misma.");
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
     /**
@@ -155,6 +160,7 @@ public class Vista {
         System.out.println("- El ciclo de reloj para su memoria SDR fue realizado exitosamente.");
         System.out.println();
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
     /**
@@ -164,6 +170,8 @@ public class Vista {
      * @version menu_sdr 1.1
      */
     public void menu_sdr(){
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("- MENU PRINCIPAL SDR");
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("1. Ciclo de Reloj.");
@@ -369,6 +377,7 @@ public class Vista {
         System.out.println();
         System.out.println();
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
     /**
@@ -378,6 +387,8 @@ public class Vista {
      * @version bienvenida_ddr 1.1
      */
     public void bienvenida_ddr(){
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("- Bienvenido a la memoria DDR.");
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("- Este es un tipo de memoria de dinamico.");
@@ -403,22 +414,7 @@ public class Vista {
         System.out.println("- Su memoria DDR fue creada exitosamente.");
         System.out.println("- Ahora accedera al menu, en el cual podra mostrar la RAM completa u obtener informacoin de la misma.");
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
-    }
-
-    /**
-     * Menu para la memoria DDR.
-     * 
-     * @author José Daniel Gómez Cabrera
-     * @version menu_ddr 1.1
-     */
-    public void menu_ddr(){
-        System.out.println("- MENU PRINCIPAL DDR");
-        System.out.println("---------------------------------------------------------------------------------------------------------------------");
-        System.out.println("1. Ciclo de Reloj.");
-        System.out.println("2. Mostrar Memoria DDR.");
-        System.out.println("3. Mostrar Informacion de la Memoria DDR.");
-        System.out.println("4. Finalizar programa.");
-        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
     /**
@@ -431,6 +427,25 @@ public class Vista {
         System.out.println();
         System.out.println("- El ciclo de reloj para su memoria DDR fue realizado exitosamente.");
         System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
+    }
+
+    /**
+     * Menu para la memoria DDR.
+     * 
+     * @author José Daniel Gómez Cabrera
+     * @version menu_ddr 1.1
+     */
+    public void menu_ddr(){
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("- MENU PRINCIPAL DDR");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("1. Ciclo de Reloj.");
+        System.out.println("2. Mostrar Memoria DDR.");
+        System.out.println("3. Mostrar Informacion de la Memoria DDR.");
+        System.out.println("4. Finalizar programa.");
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
     }
 

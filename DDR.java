@@ -80,6 +80,13 @@ public class DDR {
                 }
             }
             
+            //Actualizar cilos de reloj restantes para los programas en la lista de ejecucion.
+            if(!(this.lista_ejecucion_ddr.isEmpty())){
+                for(int j = 0; j<lista_ejecucion_ddr.size(); j++){
+                    lista_ejecucion_ddr.get(j).actualizar_ciclos_restantes();
+                }
+            }
+
             //Actualizar y poner en prioridad los programas que el usuario desea.
             //Colocar los programas que el usuario desea primero y despues los de la cola.
             ArrayList<Programa> cola_actualizada;
@@ -93,15 +100,8 @@ public class DDR {
             }
 
             //Agrandar o disminuir memoria ddr
-            int bloques_cola = contar_bloques_en_cola();
+            int bloques_cola = contar_bloques_en_cola(cola_actualizada);
             incrementar_o_disminuir_memoria(bloques_cola); 
-
-            //Actualizar cilos de reloj restantes para los programas en la lista de ejecucion.
-            if(!(this.lista_ejecucion_ddr.isEmpty())){
-                for(int j = 0; j<lista_ejecucion_ddr.size(); j++){
-                    lista_ejecucion_ddr.get(j).actualizar_ciclos_restantes();
-                }
-            }
 
             ArrayList<Programa> contador_cola_actualizada = new ArrayList<Programa>(cola_actualizada);
             actualizar_espacios_ddr();
@@ -199,7 +199,7 @@ public class DDR {
                 cola_actualizada.add(programas_a_ejecutar[k]);
             }
             for(int k = 0; k<this.lista_cola_ddr.size(); k++){
-                cola_actualizada.add(lista_cola_ddr.get(k));
+                cola_actualizada.add(this.lista_cola_ddr.get(k));
             }
             return cola_actualizada;
         }
@@ -217,10 +217,10 @@ public class DDR {
      * @version contar_bloques_en_cola 1.1
      * @return int (numero de bloques de los programas en cola)
      */
-    private int contar_bloques_en_cola(){
+    private int contar_bloques_en_cola(ArrayList<Programa> lista_actualizada){
         int bloques_en_cola = 0;
-        for(int k = 0; k<(this.lista_cola_ddr.size()); k++){
-            for(int i = 0; i<(this.lista_cola_ddr.get(k).get_bloques()); i++){
+        for(int k = 0; k<(lista_actualizada.size()); k++){
+            for(int i = 0; i<(lista_actualizada.get(k).get_bloques()); i++){
                 bloques_en_cola += 1;
             }
         }
@@ -237,6 +237,7 @@ public class DDR {
      * @param int (numero de bloques de los programas a ejecutar)
      */
     private void incrementar_o_disminuir_memoria(int bloques_en_cola){
+        actualizar_espacios_ddr();
         int bloques_necesarios = (this.espacios_ocupados_ddr)+(bloques_en_cola);
         //Convertir a memoria de 4GB (64 bloques)
         if((bloques_necesarios>0)&&(bloques_necesarios<=64)){
@@ -258,6 +259,7 @@ public class DDR {
             convertir_memoria(512);
             this.tamano_memoria_ddr = "32GB (512 Bloques)";
         }
+        actualizar_espacios_ddr();
     }
 
     /**

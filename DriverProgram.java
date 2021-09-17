@@ -118,7 +118,9 @@ public class DriverProgram{
         }
         catch(Exception e){
             String s = "\t\t- Lo sentimos, Ha ocurrido un Error: "+e.getMessage();
+            System.out.println();
             System.out.println(s);
+            System.out.println();
         }
     }
 }
